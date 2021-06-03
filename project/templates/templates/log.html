@@ -1,0 +1,19 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/welcome.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DBpj</title>
+</head>
+<body>
+
+<ul>
+{% for loginfo in loglist %}
+    <li>{{ loginfo.timestamp }} {{ loginfo.content }}</li>
+{% endfor %}
+</ul>
+
+</body>
+
+</html>

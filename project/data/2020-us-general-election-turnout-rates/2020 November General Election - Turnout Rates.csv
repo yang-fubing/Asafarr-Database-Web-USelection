@@ -1,0 +1,53 @@
+State,Source,Official/Unofficial,Total Ballots Counted (Estimate),Vote for Highest Office (President),VEP Turnout Rate,Voting-Eligible Population (VEP),Voting-Age Population (VAP),% Non-citizen,Prison,Probation,Parole,Total Ineligible Felon,Overseas Eligible,State Abv,Votes
+United States,,,158835004,,66.40%,239247182,257605088,7.80%,1461074,1962811,616440,3294457,4971025,,535
+Alabama,https://www2.alabamavotes.gov/electionnight/statewideResultsByContest.aspx?ecode=1001090,Unofficial,2306587,2297295,62.60%,3683055,3837540,2.30%,25898,50997,10266,67782,,AL,9
+Alaska,https://www.elections.alaska.gov/results/20GENR/index.php,,367000,,69.80%,525568,551117,3.40%,4293,2074,1348,6927,,AK,3
+Arizona,https://results.arizona.vote/#/featured/18/0,,3400000,,65.50%,5189000,5798473,8.90%,38520,76844,7536,93699,,AZ,11
+Arkansas,https://results.enr.clarityelections.com/AR/106124/web.264614/#/summary,Unofficial,1212030,1206697,55.50%,2182375,2331171,3.60%,17510,36719,24698,64974,,AR,6
+California,https://electionresults.sos.ca.gov/,Unofficial,16800000,,64.70%,25962648,30783255,15.00%,104730,0,102586,207316,,CA,55
+Colorado,https://results.enr.clarityelections.com/CO/105975/web.264614/#/summary,,3295000,,76.40%,4313054,4595504,5.70%,18905,0,0,18905,,CO,9
+Connecticut,,,1850000,,71.10%,2603327,2839560,7.70%,13268,0,4452,17720,,CT,7
+Delaware,https://elections.delaware.gov/results/html/index.shtml?electionId=GE2020,Unofficial,507805,502392,70.50%,720531,780822,5.80%,5874,14176,350,15013,,DE,3
+District of Columbia,https://electionresults.dcboe.org/election_results/2020-General-Election,,350000,,64.70%,540685,582065,7.10%,0,0,0,0,,DC,3
+Florida,https://floridaelectionwatch.gov/CountyReportingStatus,,11150000,,71.70%,15551739,17543341,10.10%,91674,205033,4345,223139,,FL,29
+Georgia,https://results.enr.clarityelections.com/GA/105369/web.264614/,,5025000,,68.10%,7383562,8255108,6.60%,50930,416771,20426,329754,,GA,16
+Hawaii,https://elections.hawaii.gov/wp-content/results/histatewide.pdf,Unofficial,579165,573854,57.50%,1007920,1114466,9.10%,5007,0,0,5007,,HI,4
+Idaho,https://www.livevoterturnout.com/Idaho/LiveResults/1/en/Index_113.html,Unofficial,875000,867258,67.70%,1292701,1384683,4.10%,8378,34392,5267,34968,,ID,4
+Illinois,,,6100000,,67.60%,9027082,9832749,7.80%,38464,0,0,38464,,IL,20
+Indiana,https://enr.indianavoters.in.gov/site/index.html,,3070000,,61.40%,5000007,5214546,3.60%,26302,0,0,26302,,IN,11
+Iowa,https://electionresults.iowa.gov/IA/106279/web.264614/#/summary,,1825000,,78.60%,2321131,2439743,3.50%,9216,29137,6652,33933,,IA,6
+Kansas,https://ent.sos.ks.gov/kssos_ent.html,Unofficial,1340000,1333513,64.20%,2087946,2223238,4.90%,9882,16455,5438,25522,,KS,6
+Kentucky,https://results.enr.clarityelections.com/KY/106379/web.264614/#/summary,Unofficial,2150951,2134993,64.90%,3312250,3479257,2.80%,23280,46967,15881,68281,,KY,8
+Louisiana,https://voterportal.sos.la.gov/graphical,Unofficial,2155000,2147395,63.90%,3373932,3557594,2.80%,32267,35025,29321,83304,,LA,8
+Maine,,,860000,,79.20%,1085285,1104489,1.70%,0,0,0,0,,ME,3
+Maryland,https://elections.maryland.gov/county_status_page_root.html,,3050000,,70.70%,4313416,4729400,8.40%,18165,0,0,18165,,MD,10
+Massachusetts,,,3725000,,73.40%,5072901,5566452,8.70%,7772,0,0,7772,,MA,11
+Michigan,https://mielections.us/election/results/2020GEN_CENR.html,Unofficial,5559186,5519348,73.60%,7550147,7870864,3.60%,38183,0,0,38183,,MI,16
+Minnesota,https://electionresults.sos.state.mn.us/20201103,Unofficial,3290000,3278405,79.90%,4118462,4378737,4.10%,9712,100076,7381,79140,,MN,10
+Mississippi,,,1330000,,60.40%,2201950,2279412,1.40%,19244,27294,9866,46032,,MS,6
+Missouri,https://enr.sos.mo.gov/,Unofficial,3050000,3012436,66.30%,4603060,4794796,2.40%,30148,43871,19251,76599,,MO,10
+Montana,https://electionresults.mt.gov/,Unofficial,612055,603635,73.10%,837298,851663,1.20%,3754,0,0,3754,,MT,3
+Nebraska,https://electionresults.nebraska.gov/,Unofficial,948852,935232,68.60%,1383551,1469878,4.80%,5263,14894,958,15455,,NE,3
+Nevada,,,1370000,,63.60%,2153915,2450946,11.60%,12399,0,0,12399,,NV,6
+New Hampshire,https://sos.nh.gov/elections/elections/election-results/2020/general-election/,Unofficial,814092,803833,75.40%,1079434,1115916,3.00%,2635,0,0,2635,,NH,4
+New Jersey,,,4495000,,73.00%,6158999,6952008,11.10%,18099,0,0,18099,,NJ,14
+New Mexico,https://nmresults.azurewebsites.net/Default.aspx,Unofficial,923612,919377,61.00%,1515355,1634037,6.20%,6887,12090,2805,17188,,NM,5
+New York,,,8930000,,65.30%,13670596,15372655,10.50%,42408,0,45192,87600,,NY,29
+North Carolina,https://www.ncsbe.gov/results-data/election-results,,5600000,,72.20%,7759051,8328642,5.70%,33640,80068,14215,97497,,NC,15
+North Dakota,https://results.sos.nd.gov/Default.aspx?map=Cty,Unofficial,365000,357916,64.60%,565143,584610,3.00%,1679,0,0,1679,,ND,3
+Ohio,https://liveresults.ohiosos.gov/,,6100000,,68.90%,8859167,9144626,2.60%,49892,0,0,49892,,OH,18
+Oklahoma,https://www.ok.gov/elections/Election_Info/2020_November_General_Election.html,OFFICIAL,1565000,1560699,55.00%,2845835,3031792,4.30%,27558,41562,1780,55106,,OK,7
+Oregon,https://results.oregonvotes.gov/Default.aspx,Unofficial,2404642,2334666,75.20%,3196425,3405863,5.70%,13795,0,0,13795,,OR,7
+Pennsylvania,https://www.electionreturns.pa.gov/,,6900000,,70.50%,9781976,10186170,3.50%,44148,0,0,44148,,PA,20
+Rhode Island,,,520000,,65.00%,799642,857507,6.40%,2766,0,0,2766,,RI,4
+South Carolina,https://www.enr-scvotes.org/SC/106502/Web02-state.264691/#/?undefined,Unofficial,2532995,2513314,64.50%,3926305,4116633,3.60%,18587,31975,4980,43392,,SC,9
+South Dakota,http://electionresults.sd.gov/Default.aspx,Unofficial,427529,422609,66.00%,648104,675016,2.40%,3867,5989,3201,10781,,SD,3
+Tennessee,https://elections.tn.gov/results.php,Unofficial,3060000,3045401,59.70%,5124867,5391220,3.60%,26107,61253,10842,74926,,TN,11
+Texas,https://results.texas-election.com/races,Unofficial,11300000,11231799,60.20%,18784280,22058260,12.60%,154913,368167,109213,492390,,TX,38
+Utah,https://electionresults.utah.gov/elections/,,1450000,,66.20%,2191487,2343384,6.20%,6287,0,0,6287,,UT,6
+Vermont,https://electionresults.vermont.gov/Index.html#/federal,,370000,,74.00%,499884,511637,2.30%,0,0,0,0,,VT,3
+Virginia,https://results.elections.virginia.gov/vaelections/2020%20November%20General/Site/Presidential.html,Unofficial,4425000,4409913,71.40%,6196071,6727440,6.80%,35743,63111,1860,76732,,VA,13
+Washington,https://results.vote.wa.gov/results/20201103/turnout.html,,4100000,,75.40%,5437844,6070046,9.10%,18777,76672,12222,78536,,WA,12
+West Virginia,,,795000,,57.00%,1394028,1422098,0.90%,6757,6593,4287,15132,,WV,5
+Wisconsin,,,3325000,,76.10%,4368530,4586746,3.20%,23574,42909,21015,71193,,WI,10
+Wyoming,https://sos.wyo.gov/Elections/Docs/2020/2020GeneralResults.aspx,OFFICIAL,278503,276765,64.60%,431364,447915,2.20%,2488,5383,934,6759,,WY,3

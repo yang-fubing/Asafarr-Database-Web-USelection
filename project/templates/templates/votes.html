@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block mainbody %}
+    <div class="row" style="background: white; border-radius: 10px;">
+        <div class="col" style="width:20%;padding: 20px;margin: 10px">
+            <div style="overflow: scroll;font-size:20px">
+                <h2>{{ state_votes.state }}</h2>
+                <br>
+                DEM: {{ state_votes.DEM }} <br>
+                REP: {{ state_votes.REP }}  <br>
+                <br>
+                <br>
+                Has {{ state_votes.info.has_votes_right_population }} persons with votes-right,
+                {{ state_votes.info.in_votes_ages_population }} persons in votes-ages,
+                and {{ state_votes.info.prisoner_population }} prisoners. <br>
+            </div>
+            <br>
+            <br>
+            <div>
+                <img style="width: 100%" src="{{ img }}" alt="test"/>
+            </div>
+        </div>
+
+        <div class="col" style="height:720px;overflow: scroll;font-size:13px;margin: 10px">
+            <table style="width:100%; background: #eaecf0; border: 1px solid #a2a9b1; border-collapse: collapse">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="text-align:center">State</th>
+                        <th rowspan="2" style="text-align:center">Acronym</th>
+                        <th rowspan="2" style="text-align:center">Election</th>
+                        <th colspan="2">Joe Biden<br>Democratic</th>
+                        <th colspan="2">Donald Trump<br>Republican</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:center">Votes</th>
+                        <th style="text-align:right">%</th>
+                        <th style="text-align:center">Votes</th>
+                        <th style="text-align:right">%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for votes in votes_list %}
+                        {% if votes.DEM > votes.REP %}
+                            <tr style="background:#B0CEFF">
+                        {% elif votes.DEM < votes.REP %}
+                            <tr style="background:#FFB6B6">
+                        {% else %}
+                            <tr style="background:#FFFFFF">
+                        {% endif %}
+                            <td style="text-align: center">
+                                <a href="javascript:selectState('{{ votes.state }}')">
+                                    {{ votes.state }}
+                                </a>
+                            </td>
+                            <td style="text-align: center">{{ votes.state_abbr }}</td>
+                            <td style="text-align: right">{{ votes.state_vote }}</td>
+                            {% if request.session.username == "root" %}
+                                <td id="dem_votes_{{ votes.state }}" class="dem_votes" style="text-align: right">
+                                    {{ votes.DEM }}
+                                </td>
+                            {% else %}
+                                <td id="dem_votes_{{ votes.state }}" style="text-align: right">
+                                    {{ votes.DEM }}
+                                </td>
+                            {% endif %}
+                            <td style="text-align: right">{{ votes.DEM_percent|floatformat:"2"}} % </td>
+                            {% if request.session.username == "root" %}
+                                <td id="rep_votes_{{ votes.state }}" class="rep_votes" style="text-align: right">
+                                    {{ votes.REP }}
+                                </td>
+                            {% else %}
+                                <td id="rep_votes_{{ votes.state }}" style="text-align: right">
+                                    {{ votes.REP }}
+                                </td>
+                            {% endif %}
+                            <td style="text-align: right">{{ votes.REP_percent|floatformat:"2"}} % </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <script type="text/javascript">
+                function selectState(state) {
+                    var params = {
+                        'select_state': state,
+                    };
+                    httpPost("/votes/", params);
+                }
+            </script>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        function enter_event (e) {
+            if (e.keyCode == 13){
+                _id = jQuery(this).attr('id');
+                _class = jQuery(this).attr('class');
+                text = jQuery(this).text();
+                var params = {
+                    'update_votes_id': _id,
+                    'update_votes_new': jQuery(this).text(),
+                };
+                httpPost("/votes/", params);
+                jQuery(this).attr("contentEditable", false);
+                //jQuery(this).html("<td id=" + _id + " class=" + _class + " style=\"text-align: right\">" + text + "</td>");
+            }
+        }
+
+        function dblclick_event () {
+            _id = jQuery(this).attr('id');
+            _class = jQuery(this).attr('class');
+            text = jQuery(this).text();
+            jQuery(this).attr("contentEditable", true);
+            //jQuery(this).html("<textarea id=" + _id + " class=" + _class + ">" + text + "</textarea>");
+            jQuery(this).on("keydown", enter_event);
+        }
+
+        jQuery(document).ready(function () {
+            jQuery(".dem_votes").dblclick(dblclick_event);
+            jQuery(".rep_votes").dblclick(dblclick_event);
+        })
+    </script>
+{% endblock %}

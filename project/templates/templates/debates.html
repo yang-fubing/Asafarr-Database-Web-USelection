@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block mainbody %}
+
+    <div class="col" style="width:90%;box-shadow: inset 0 0 30px 12px #ffdddd;background: rgba(250,235,215,0.8);padding: 10px 10px 10px 50px;margin:10px;font-size:18px;color: #000009;border-radius: 30px">
+        <ol>
+            {% for debate in debates_list %}
+                <li>
+                    <a href="javascript:select_debate('{{ debate.title }}')"> {{ debate.title }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="col" style="width:90%;height:60vh;padding:20px;margin:20px;border-radius: 20px;background-color: rgb(255,255,255)">
+        <span style="font-size: 32px;font-weight: 600;color:#000002">{{ debate_ite.title }}</span>
+        <div style="font-weight:300;height:70%;overflow: scroll;background-color: rgba(255,0,0,0);font-size: 22px; margin: 8px">
+            {% for script in debate_script %}
+                {% if script.step == 0 %}
+                    <span id="script_{{ script.step }}" data-timestamp={{ script.time_stamp }}>
+                {% else %}
+                    <span id="script_{{ script.step }}" data-timestamp={{ script.time_stamp }} hidden>
+                {% endif %}
+                    <span style="font-size: 24px;font-weight:400">Speaker: {{ script.speaker }} </span><br>
+                    <br>
+                    {{ script.text }} <br>
+                    <br>
+                </span>
+            {% endfor %}
+        </div>
+        <div style="margin: 10px;font-weight:300;color:#00000a">
+            <audio controls id="audio">
+                <source src="{{ debate_ite.voice_location }}" type="audio/mpeg">
+            </audio>
+            <span id="time" hidden="hidden">0</span>
+        </div>
+    </div>
+
+    <script>
+        var script_cursor = 1;
+        var script_cursor_id = "script_" + script_cursor.toString();
+        var tmp = $("#" + script_cursor_id);
+        var script_nexttime = tmp.data("timestamp");
+        console.log(script_cursor_id);
+        console.log(tmp);
+        console.log(script_nexttime);
+        function watchMusicTime(){
+            let musicDom = document.getElementById('audio');
+            musicDom.addEventListener("timeupdate",function(){
+                let timeDisplay;
+                timeDisplay = Math.floor(musicDom.currentTime);
+                //console.log(timeDisplay);
+                document.getElementById('time').innerHTML = timeDisplay;
+                while (timeDisplay >= script_nexttime){
+                    console.log("#script_" + (script_cursor - 1).toString());
+                    $("#script_" + (script_cursor - 1).toString()).hide();
+                    tmp.show();
+                    script_cursor += 1;
+                    script_cursor_id = "script_" + script_cursor.toString();
+                    tmp = $("#" + script_cursor_id);
+                    if (tmp.length > 0)
+                        script_nexttime = tmp.data("timestamp");
+                    else
+                        script_nexttime = 2e9;
+                }
+            },false);
+        }
+        window.onload = watchMusicTime;
+    </script>
+
+    <script>
+        function select_debate(title) {
+            var params = {
+                "select_debate": title
+            };
+            httpPost("/debates/", params);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% load static %}
+<script src="{% static 'lib/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'lib/jquery.SuperSlide.2.1.3.js' %}"></script>
+<script src="{% static 'lib/angular.min.js' %}"></script>
+<script src="{% static 'lib/angular-route.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/tweet.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/carousel.css' %}">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DBpj</title>
+</head>
+<body style="background-image:url({% static "pic/bg-bing.png" %})">
+    <h1 style="text-align: center;font-size: 40px"> U.S. Election </h1>
+    <board class="row">
+        <div class="col" style="width:30%; padding: 30px 30px 30px 100px">
+            <ul style="text-align:center;">
+                <a href="/">
+                    <li class="list-group-item">Home</li>
+                </a>
+                <a href="/candidate">
+                    <li class="list-group-item">Candidates</li>
+                </a>
+                <a href="/tweet">
+                    <li class="list-group-item">Tweet</li>
+                </a>
+                <a href="/debates">
+                    <li class="list-group-item">Debates</li>
+                </a>
+                <a href="/votes">
+                    <li class="list-group-item">Votes</li>
+                </a>
+                <li class="list-group-item">
+                    {% if not request.session.is_login %}
+                        Guest
+                    {% else %}
+                        {{ request.session.username }}
+                        {% if request.session.user_state != "" or request.session.user_voted != "" %}
+                            (
+                            {% if request.session.user_state != "" %}
+                                {{ request.session.user_state }}
+                            {% endif %}
+                            {% if request.session.user_voted != "" %}
+                                , {{ request.session.user_voted }}
+                            {% endif %}
+                            )
+                        {% endif %}
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    {% if not request.session.is_login %}
+                    	<a href="javascript:show_login()">Log in</a>
+                    {% else %}
+                        <a href="javascript:show_login()">Log out</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+        <div class="col" style="width:70%; padding: 30px 200px 30px 30px;">
+            {% block mainbody %}
+               <p>original</p>
+            {% endblock %}
+        </div>
+    </board>
+    <div class="login_modal">
+        <div class="login_container">
+            <form action="/" method="post" style="margin: 40px">
+                {% csrf_token %}
+                {% if not request.session.is_login %}
+                    <input class="login_input" type="text" placeholder="username" name="username"><br>
+                    <input class="login_input" type="password" placeholder="password" name="password"><br>
+                    <input class="login_input" type="text" placeholder="state" name="state"><br>
+                    <input class="login_submit" type="submit" name="login" value="login">
+                    <input class="login_submit" type="submit" name="register" value="register">
+                {% else %}
+                    username: {{ request.session.username }}<br>
+                    <input class="login_submit" type="submit" name="logout" value="logout">
+                {% endif %}
+                <br>
+            </form>
+        </div>
+    </div>
+    {{ message }}
+</body>
+
+<script type="text/javascript">
+    jQuery(".carousel-inner").slide({mainCell:"ul",autoPlay:true});
+
+    function show_login(){
+        let t = document.getElementsByClassName('login_modal')[0];
+        t.style.visibility = 'visible';
+    }
+</script>
+
+<script type="text/javascript">
+    function httpPost(URL, PARAMS) {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+
+        for (var x in PARAMS) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = PARAMS[x];
+            temp.appendChild(opt);
+        }
+
+        document.body.appendChild(temp);
+        temp.submit();
+
+        return temp;
+    }
+</script>
+</html>

@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block mainbody %}
+    <div class="row" style="border-style:double;border-radius:10px;margin-top:20px;height:90vh;overflow:scroll;background-color:rgba(248,248,255,0.8)">
+        <div class="col" style="overflow:scroll;width: 70%">
+            {% for tweet in tweet_list %}
+                <div class="row" style="margin: 30px">
+                    <div class="col" style="width: 10%">
+                        <img src="{% static "pic/twitter.png" %}" style="width:80px; margin: 0 auto">
+                    </div>
+                    <div class="col" style="width: 70%">
+                        <span style="margin: 10px;font-size: 23px;font-weight:600;text-align: left">
+                            {{ tweet.0.username }}
+                        </span>
+                        <span style="margin: 10px;font-size: 15px;text-align: left">
+                            @ {{ tweet.0.user_screen_name }}
+                        </span>
+                        <span style="margin: 5px;font-size: 15px">
+                            {{ tweet.1 }}<br>
+                        </span>
+                        <br>
+                        {{ tweet.0.text|safe }}
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col" style="width: 5%">
+                            </div>
+                            <div class="col" style="width: 10%">
+                                {% if not request.session.is_login %}
+                                    <i class="fa fa-heart-o"></i>
+                                    {{ tweet.0.likes }}
+                                {% elif tweet.2 %}
+                                    <i class="fa fa-heart" style="color:red"></i>
+                                    {{ tweet.0.likes }}
+                                {% else %}
+                                    <a href="javascript:like_a_tweet({{ tweet.0.id }})">
+                                        <i class="fa fa-heart-o"></i>
+                                    </a>
+                                    {{ tweet.0.likes }}
+                                {% endif %}
+                            </div>
+                            <div class="col" style="width: 10%">
+                                <i class="fa fa-retweet"></i> {{ tweet.0.retweet }}
+                            </div>
+                            <div class="col" style="width: 30%">
+                                {{ forloop.counter }} / {{ total }}
+                            </div>
+                            <div class="col" style="width: 10%">
+                                {% if request.session.username == "root" %}
+                                    <a href="javascript:drop_a_tweet({{ tweet.0.id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div class="col" style="width: 20%; padding: 30px">
+            {% if request.session.is_login %}
+                <div id="new_tweet_content" contentEditable=true
+                     style="margin-top:50px;border:ridge;padding:10px;height:200px;overflow:scroll">
+                    Post your comment here!
+                </div>
+                <div style="padding: 15px">
+                    <span>@{{ request.session.username }}</span>
+                    <button name="new_tweet_button" onclick="new_tweet_submit()" style="float: right;border-radius:20px;width:70px;height:40px;background:lightblue;border:outset">Post</button>
+                </div>
+            {% else %}
+                <div id="new_tweet_content"
+                     style="margin-top:50px;border:ridge;padding:10px;height:200px;overflow:scroll">
+                    Log in to comment
+                </div>
+                <div style="padding: 15px">
+                    <span>@Guest(U.S.)</span>
+                    <button name="new_tweet_button" style="float: right;border-radius:20px;width:70px;height:40px;background:gray;border:outset">Post</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="box-shadow: inset 0 0 18px 12px #1961FB; position:fixed;left:10%;bottom:7%;font-size: 15px;background-color: rgba(200,200,200,0.7);border-radius: 10px">
+        <form id="tweet_search_form" action="/tweet/" method="post" style="padding: 20px">
+            <div style="text-align: center">
+                <i class="fa fa-heart-o"></i> &ge; <span id="likes_limit_value">{{ likes_limit }}</span>
+            </div>
+            <div class=tweet-range-input-box>
+                <div>
+                    0
+                    <input class="tweet-range-input" id="likes_limit_input"
+                           name="likes_limit" value={{ likes_limit }}
+                           type="range" min="0" max="100" step="10"
+                           oninput="change_like()" onchange="change_like()">
+                    >100
+                </div>
+            </div>
+            <div style="text-align: center">
+                <i class="fa fa-retweet"></i> &ge; <span id="retweet_limit_value">{{ retweet_limit }}</span>
+            </div>
+            <div class=tweet-range-input-box>
+                <div>
+                    0
+                    <input class="tweet-range-input" id="retweet_limit_input"
+                           name="retweet_limit" value={{ retweet_limit }}
+                           type="range" min="0" max="100" step="10"
+                           oninput="change_retweet()" onchange="change_retweet()">
+                    >100
+                </div>
+            </div>
+            <input class="login_input tweet_input" type="text" style="margin: 5px"
+                   name="username" placeholder="username" value= {{ username }}><br>
+            <input class="login_input tweet_input" type="text" style="margin: 5px"
+                   name="contains_text" placeholder="contains_text" value= {{ contains_text }}><br>
+        </form>
+    </div>
+
+    <script type='text/javascript'>
+
+        function drop_a_tweet(tweet_id) {
+            var params = {
+                "drop_id": tweet_id
+            };
+            httpPost("/tweet/", params);
+        }
+
+        function like_a_tweet(tweet_id) {
+            var params = {
+                "likes_tweet_id": tweet_id
+            };
+            httpPost("/tweet/", params);
+        }
+
+        function new_tweet_submit() {
+            var params = {
+                "new_tweet_content": $("#new_tweet_content").text()
+            };
+            httpPost("/tweet/", params);
+        }
+
+    function change_like() {
+            var value = document.getElementById('likes_limit_input').value;
+            document.getElementById('likes_limit_value').innerHTML = value;
+        }
+
+        function change_retweet() {
+            var value = document.getElementById('retweet_limit_input').value;
+            document.getElementById('retweet_limit_value').innerHTML = value;
+        }
+
+        function tweet_search_form_submit (e) {
+            if (e.keyCode == 13)
+                $("#tweet_search_form").submit();
+        }
+
+        jQuery(document).ready(function () {
+            jQuery(".tweet_input").on("keydown", tweet_search_form_submit);
+        })
+    </script>
+{% endblock %}

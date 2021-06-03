@@ -1,0 +1,112 @@
+{%extends "base.html" %}
+{% load static %}
+{% block mainbody %}
+    <div class="carousel-inner">
+        <ul style="list-style:none; padding:0 ;margin:0;">
+            <li>
+                <div class="carousel-item">
+                    <img src="{% static "pic/news-1.jpg" %}" alt = "...">
+                    <div style="width:80%;color: #ffffff; position: relative; left:50px; bottom: 200px">
+                        <p style="font-size: 36px; text-align: center">
+                            Trump probably can't pardon himself
+                        </p>
+                        <p style="font-size: 18px;">
+                            (CNN)President Donald Trump, has acknowledged -- sort of and
+                            without admitting defeat -- that Joe Biden will be taking over on January 20 at
+                            noon.
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="carousel-item">
+                    <img src="{% static "pic/news-2.jpg" %}" alt = "...">
+                    <div style="width:80%;color: #ffffff; position: relative; left:50px; bottom: 200px">
+                        <p style="font-size: 36px; text-align: center">
+                            Trump's case of coronavirus
+                        </p>
+                        <p style="font-size: 18px;">
+                            (CNN)Coronavirus remains the most prominent thing Americans have seen.
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="carousel-item">
+                    <img src="{% static "pic/news-3.jpg" %}" alt = "...">
+                    <div style="width:80%;color: #ffffff; position: relative; left:50px; bottom: 200px">
+                        <p style="font-size: 36px; text-align: center">
+                            Electoral College set to seal Trump's fate
+                        </p>
+                        <p style="font-size: 18px;">
+                            (CNN)A constitutional ritual that is normally a little-noticed
+                            curiosity will Monday turn into a symbol of the US political system's
+                            durability.
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    {% if request.session.is_login %}
+        <div id="biden-left" style="position:absolute;left:380px;bottom:50px">
+            <img src={% static "pic/biden-left-trans.png" %}>
+        </div>
+
+        <div id="trump-right" style="position:absolute;right:350px;bottom:50px">
+            <img src={% static "pic/trump-right-trans.png" %}>
+        </div>
+    {% endif %}
+
+    <script type="text/javascript">
+        function img_jump(e){
+            $("#biden-left").off("click", img_jump);
+            $("#trump-right").off("click", img_jump);
+            var id = "#" + e.currentTarget.id;
+            console.log(id);
+            for (var i = 0; i < 100; i++){
+                (function(i){
+                    setTimeout(function(){
+                        $(id)[0].style.bottom = 150 - (100 - i) * (100 - i)  / 100;
+                    }, (i + 1) * 5)
+                })(i)
+            }
+            for (var i = 0; i < 100; i++){
+                (function(i){
+                    setTimeout(function(){
+                        $(id)[0].style.bottom = 150 - ( - i) * ( - i)  / 200;
+                    }, (i + 101) * 5)
+                })(i)
+            }
+            for (var i = 0; i < 100; i++){
+                (function(i){
+                    setTimeout(function(){
+                        $(id)[0].style.bottom = 125 - (100 - i) * (100 - i)  / 400;
+                    }, (i + 201) * 5)
+                })(i)
+            }
+            for (var i = 0; i < 100; i++){
+                (function(i){
+                    setTimeout(function(){
+                        $(id)[0].style.bottom = 125 - ( - i) * ( - i)  / 400;
+                    }, (i + 301) * 5)
+                })(i)
+            }
+            (function(i){
+                setTimeout(function(){
+                    var params = {
+                        "vote_candidate": id
+                    };
+                    httpPost("/", params);
+                }, 3000)
+            })(i)
+        }
+
+
+        jQuery(document).ready(function () {
+            $("#biden-left").on("click", img_jump);
+            $("#trump-right").on("click", img_jump);
+        })
+    </script>
+{% endblock %}

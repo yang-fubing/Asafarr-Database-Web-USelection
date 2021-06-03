@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block mainbody %}
+    <div style="background: rgba(255,255,255,0.83);padding: 20px; display: flex; flex-wrap: wrap; margin: 20px">
+        <div class="col">
+            <form action="/candidate/" method="post" name="query">
+                <input id = "candidate_name" class="login_input" type="text" placeholder="name" name="name" value="{{ query_name }}"><br>
+                <input id = "candidate_party" class="login_input" type="text" placeholder="party" name="party" value="{{ query_party }}"><br>
+                <input class="login_submit" type="submit" name="Search" value="Search">
+            </form>
+        </div>
+        <div class="col" style="height: 175px; overflow:scroll;">
+            <table style="text-align:left">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Party</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for candidate in candidate_list %}
+                        <tr>
+                            <td><a href="javascript:selectCandidate('{{ candidate.0 }}')">{{ candidate.0 }}</a></td>
+                            <td><a href="javascript:selectCandidate('{{ candidate.0 }}')">{{ candidate.1 }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <script type="text/javascript">
+                function selectCandidate(name) {
+                    var params = {
+                        'select_candidate': name,
+                        'name': $("#candidate_name").val(),
+                        'party': $("#candidate_party").val()
+                    };
+                    httpPost("/candidate/", params);
+                }
+            </script>
+        </div>
+    </div>
+    <div style="height: 500px;border-radius: 20px;background: rgba(255,255,255,0.75);padding: 40px; overflow: scroll;font-size: 15px;margin: 20px">
+        <img src="{{ pic }}" style="float:right">
+        {{ description|safe }}
+    </div>
+
+{% endblock %}
